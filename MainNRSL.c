@@ -11,39 +11,35 @@ int main(){
 	infotype groupName, teamName;
 	ListGroup MyListGroup;
 	ListTeam MyListTim;
-	int JmlGroup = 1;
-	int pilihMenu,pilihMenuDel;
+	int JumlahGroup = 1;
+	int pilihMenu,pilihMenuDelete;
 	
 	//program
-	groupName = (char*) malloc (20 * sizeof (char));
-	printf("Silahkan masukan nama grup ke-%d: ",JmlGroup);
-	scanf("%s",groupName);
 	CreateListGroup(&MyListGroup);
-	InsVLastGroup(&MyListGroup,groupName);
-	HeadGroup = First(MyListGroup);
-	JmlGroup++;
 	for(;;){
 		system("cls");
-		PrintInfo (MyListGroup);
-//		printf("%d", Gol(First(MyListGroup));
-		printf("\nPilih opsi\n1. Tambah grup\n2. Tambah tim\n3. Delete\n0. Exit\nMasukkan pilihan Anda: ");
+		if(!isEmptyGroup(MyListGroup)){
+			PrintInfo (MyListGroup);
+		}
+		
+		printf("Pilih opsi\n1. Tambah grup\n2. Tambah tim\n3. Delete\n0. Exit\nMasukkan pilihan Anda: ");
 	    scanf("%d", &pilihMenu);
 	    switch(pilihMenu) {
 	    	case 1:
 	    		groupName = (char*) malloc (20 * sizeof (char));
-				printf("Silahkan masukan nama grup ke-%d: ",JmlGroup);
+				printf("Silahkan masukan nama grup ke-%d: ", JumlahGroup);
 				scanf("%s",groupName);
 				//validasi jika nama groupName sudah tersedia, jika belum akan di tambahkan ke MyListGroup
 				for(;;){
-					if (strcmp(groupName, Info(HeadGroup)) == 0){
-						printf("Nama grup %s sudah tersedia \n",groupName);
+					if (strcmp(groupName, InfoGroup(HeadGroup)) == 0){
+						printf("Nama grup %s sudah tersedia \n", groupName);
 						system("pause");
 						break;
 					}
 					else {
 						if (nextGroup(HeadGroup) == Nil){
-							InsVLastGroup(&MyListGroup,groupName);
-							JmlGroup++;
+							InsVLastGroup(&MyListGroup, groupName);
+							JumlahGroup++;
 							break;
 						}
 						HeadGroup = nextGroup(HeadGroup);
@@ -55,18 +51,18 @@ int main(){
 	    	case 2:
 				groupName = (char*) malloc (20 * sizeof (char));
 				printf("Silahkan pilih nama grup : ");
-				scanf("%s",groupName);
+				scanf("%s", groupName);
 				//validasi apakah nama groupName sudah tersedia atau tidak
 				for(;;){
 					//jika groupName ada maka akan disuruh input teamName Kemudian di simpan di MyListTim
-					if (strcmp(groupName, Info(HeadGroup)) == 0){
+					if (strcmp(groupName, InfoGroup(HeadGroup)) == 0){
 						teamName = (char*) malloc (20 * sizeof (char));
 						printf("Silahkan masukan nama tim : ");
-						scanf("%s",teamName);
+						scanf("%s", teamName);
 						//jika MyListGroup belum tersambung sama sekali
 						if (nextGroupToTeam(HeadGroup) == Nil){
 							CreateListTeam(&MyListTim);
-							InsVLastTeam(&MyListTim,teamName);
+							InsVLastTeam(&MyListTim, teamName);
 							nextGroupToTeam(HeadGroup) = First(MyListTim); //menyambungkan MyListGroup dengan MylistMhs
 							break;
 						}
@@ -79,7 +75,7 @@ int main(){
 					}
 					else {
 						if (nextGroup(HeadGroup) == Nil){ //jika next groupName == Nil (tidak ketemu)
-							printf("Nama grup %s tidak tersedia\n",groupName);
+							printf("Nama grup %s tidak tersedia\n", groupName);
 							system("pause");
 							break;
 						}
@@ -94,34 +90,34 @@ int main(){
 	    		system("cls");
 	    		PrintInfo (MyListGroup);
 	    		printf("Opsi delete\n1. Grup\n2. Team\nSilahkan pilih opsi delete berdasarkan angka: ");
-	    		scanf("%d",&pilihMenuDel);
-	    		switch(pilihMenuDel){
+	    		scanf("%d",&pilihMenuDelete);
+	    		switch(pilihMenuDelete){
 	    			case 1:
 	    				groupName = (char*) malloc (20 * sizeof (char));
 	    				printf("\nSilahkan ketikan nama grup yang akan di delete : ");
 	            		scanf("%s", groupName);
 	            		//validasi jika yang di hapus list pertama
-	            		if (strcmp(Info(HeadGroup), groupName) == 0){
+	            		if (strcmp(InfoGroup(HeadGroup), groupName) == 0){
 	            			HeadGroup = nextGroup(HeadGroup); //HeadGroup di isi list groupName yang kedua
 	            			First(MyListGroup) = HeadGroup; //HeadGroup (groupName ke 2) dijadikan first
 						}
 	    				DelPGroup(&MyListGroup,groupName); //dealloc
-	    				JmlGroup--;
+	    				JumlahGroup--;
 	    			break;
 	    			case 2:
 	    				groupName = (char*) malloc (20 * sizeof (char));
 						printf("Silahkan pilih nama grup : ");
-						scanf("%s",groupName);
+						scanf("%s", groupName);
 						//validasi apakah nama groupName sudah tersedia atau tidak
 	    				for(;;){
 	    					//jika groupName ada maka akan disuruh input teamName
-							if (strcmp(Info(HeadGroup), groupName) == 0){
+							if (strcmp(InfoGroup(HeadGroup), groupName) == 0){
 								teamName = (char*) malloc (20 * sizeof (char));
 								printf("\nSilahkan ketikan nama tim yang akan di delete : ");
 								scanf("%s",teamName);
 								First(MyListTim) = nextGroupToTeam(HeadGroup); //agar MyListTim nya sesuai diinput di groupName yang di inginkan
 								//validasi jika yang di hapus list pertama
-			            		if (strcmp(Info(First(MyListTim)), teamName) == 0){
+			            		if (strcmp(InfoTeam(First(MyListTim)), teamName) == 0){
 			            			First(MyListTim) = Next(First(MyListTim)); //list kedua menjadi first
 			            			nextGroupToTeam(HeadGroup) = First(MyListTim); //di kaitkan First yang baru ke list groupName
 			            			break;
@@ -143,12 +139,12 @@ int main(){
 						HeadGroup = First(MyListGroup);
 	    			break;
 	    			default:
-	    				printf("Kesalahan input! Menu %d tidak tersedia \n",pilihMenuDel);
+	    				printf("Kesalahan input! Menu %d tidak tersedia \n", pilihMenuDelete);
 	    				system("pause");
 	    			break;
 				}
 	    	break;
-	    	case 0:
+	    	case 4:
 	    		exit(1);
 	    	break;
 	    	default:
