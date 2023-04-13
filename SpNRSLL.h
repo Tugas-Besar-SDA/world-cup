@@ -1,20 +1,21 @@
 #ifndef spnrsll_H
 #define spnrsll_H
+
 #include "boolean.h"
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #define Nil NULL
 #define InfoGroup(P) (P)->infoGroup
 #define InfoTeam(P) (P)->infoTeam
-
 #define nextGroup(P) (P)->nextGroup
 #define nextGroupToTeam(P) (P)->nextGroupToTeam
-//#define Info(Q) (Q)->info
 #define Skor(Q) (Q)->skor
 #define Gol(Q) (Q)->gol
 #define Selisih(Q) (Q)->selisih
-#define Next(Q) (Q)->next
+#define NextTeam(Q) (Q)->nextTeam
 #define First(L) (L).First
-//#define Pertama(L) (L).Pertama
 
 typedef char *infotype;
 typedef struct tDataGroup *addressGroup;
@@ -30,7 +31,7 @@ typedef struct tDataTeam {
 	int skor;
 	int gol;
 	int selisih;
-	addressTeam next;
+	addressTeam nextTeam;
 }DataTeam;
 
 typedef struct {
@@ -50,6 +51,9 @@ void CreateListTeam (ListTeam * L);
 /* FS : Terbentuk ListTeam Kosong */
 
 boolean isEmptyGroup(ListGroup L);
+/* IS : L mungkin Nil */
+/* FS : Mengembalikan true jika ListGroup masih Nil, */
+/*      sedangkan mengembalikan nilai false jika ListGroup sudah menunjuk ke node */
 
 addressGroup AlokasiGroup (infotype X);
 /* Mengirimkan addressGroup hasil alokasiGroup sebuah elemen */
