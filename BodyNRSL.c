@@ -12,42 +12,42 @@ void CreateListGroup (ListGroup * L)
 	First(*L) = Nil;
 }
 
-void CreateListTim (ListTim * L)
+void CreateListTeam (ListTeam * L)
 /* IS : L sembarang */
-/* FS : Terbentuk ListTim Kosong */
+/* FS : Terbentuk ListTeam Kosong */
 {
 	First(*L) = Nil;
 }
 
-address AlokasiGroup (infotype X)
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address != Nil, 	   */
-/*	dan misalnya menghasilkan P, maka Info(P) = X, NextGroup(P) = Nil, NextTim(P) = Nil */
+addressGroup AlokasiGroup (infotype X)
+/* Mengirimkan addressGroup hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressGroup != Nil, 	   */
+/*	dan misalnya menghasilkan P, maka Info(P) = X, nextGroup(P) = Nil, nextGroupToTeam(P) = Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 {
 	/* Kamus Lokal */
-	address P;
+	addressGroup P;
 	/* Algoritma */
-	P = (address) malloc (sizeof (ElmtList));
+	P = (addressGroup) malloc (sizeof (DataGroup));
 	if (P != Nil)		/* Alokasi berhasil */
 	{
 		Info(P) = X;
-		NextGroup(P) = Nil;
-		NextTim(P) = Nil;
+		nextGroup(P) = Nil;
+		nextGroupToTeam(P) = Nil;
 	}
 	return (P);
 }
 
-addressTim AlokasiTim (infotype X)
-/* Mengirimkan addressTim hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addressTim != Nil, 	   */
+addressTeam AlokasiTeam (infotype X)
+/* Mengirimkan addressTeam hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressTeam != Nil, 	   */
 /*	dan misalnya menghasilkan P, maka Info(P) = X, Next(P) = Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 {
 	/* Kamus Lokal */
-	addressTim P;
+	addressTeam P;
 	/* Algoritma */
-	P = (addressTim) malloc (sizeof (dataTim));
+	P = (addressTeam) malloc (sizeof (DataTeam));
 	if (P != Nil)		/* Alokasi berhasil */
 	{
 		Info(P) = X;
@@ -59,31 +59,31 @@ addressTim AlokasiTim (infotype X)
 	return (P);
 }
 
-void InsertLastGroup (ListGroup * L, address P)
+void InsertLastGroup (ListGroup * L, addressGroup P)
 /* IS : L sembarang, P sudah dialokasi */
 /* FS : P ditambahkan sebagai elemen terakhir yang baru */
 {
 	 /* Kamus Lokal */
-	address Last;
+	addressGroup Last;
 	 /* Algoritma */
 	if (First(*L) != Nil){
 		Last = First(*L);
-		while (NextGroup(Last) != Nil){
-			Last = NextGroup(Last); 
+		while (nextGroup(Last) != Nil){
+			Last = nextGroup(Last); 
 		}
-		NextGroup(Last) = P;
+		nextGroup(Last) = P;
 	}
 	else{
 		First(*L) = P;
 	}
 }
 
-void InsertLastTim (ListTim * L, addressTim P)
+void InsertLastTeam (ListTeam * L, addressTeam P)
 /* IS : L sembarang, P sudah dialokasi */
 /* FS : P ditambahkan sebagai elemen terakhir yang baru */
 {
 	 /* Kamus Lokal */
-	addressTim Last;
+	addressTeam Last;
 	 /* Algoritma */
 	if (First(*L) != Nil){
 		Last = First(*L);
@@ -104,7 +104,7 @@ void InsVLastGroup (ListGroup * L, infotype X)
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal IS = FS */
 {
 	 /* Kamus Lokal */
-	address P;
+	addressGroup P;
 	 /* Algoritma */
 	P = AlokasiGroup (X);
 	if (P != Nil){
@@ -112,18 +112,18 @@ void InsVLastGroup (ListGroup * L, infotype X)
 	}
 }
 
-void InsVLastTim (ListTim * L, infotype X)
+void InsVLastTeam (ListTeam * L, infotype X)
 /* IS : L mungkin Kosong */
 /* FS : melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen ListTim di akhir (elemen terakhir adalah yang baru) */
+/* menambahkan elemen ListTeam di akhir (elemen terakhir adalah yang baru) */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal IS = FS */
 {
 	 /* Kamus Lokal */
-	addressTim P;
+	addressTeam P;
 	 /* Algoritma */
-	P = AlokasiTim (X);
+	P = AlokasiTeam (X);
 	if (P != Nil){
-		InsertLastTim (&(*L), P);
+		InsertLastTeam (&(*L), P);
 	}
 }
 
@@ -133,8 +133,8 @@ void PrintInfo (ListGroup L)
 /*	diprint. Jika ListGroup kosong, hanya menuliskan "ListGroup Kosong" */
 {
 	 /* Kamus Lokal */
-	address P;
-	addressTim Q;
+	addressGroup P;
+	addressTeam Q;
 	int i = 0;
 	 /* Algoritma */
 	if (First(L) == Nil){
@@ -148,8 +148,8 @@ void PrintInfo (ListGroup L)
 				break;
 			}
 			else {	/* Belum berada di akhir ListGroup */
-				printf ("%d. %s",++i, Info(P));
-				Q = NextTim(P);
+				printf ("%d. %s\n  ",++i, Info(P));
+				Q = nextGroupToTeam(P);
 				for (;;){
 					if (Q == Nil){
 						printf("\n");
@@ -159,30 +159,30 @@ void PrintInfo (ListGroup L)
 						printf (" %s", Info(Q));
 						printf (" Gol : %d", Gol(Q));
 						printf (" Skor : %d", Skor(Q));
-						printf (" Selisih : %d", Selisih(Q));
+						printf (" Selisih : %d\n  ", Selisih(Q));
 						Q = Next(Q);
 					}	
 				}
-				P = NextGroup(P);
+				P = nextGroup(P);
 			}
 		}
 	}
 }
 
-void DeAlokasiGroup (address P)
+void DeAlokasiGroup (addressGroup P)
 /* IS : P terdefinisi */
 /* FS : P dikembalikan ke sistem */
-/* Melakukan dealokasi / pengembalian address P ke system */
+/* Melakukan dealokasi / pengembalian addressGroup P ke system */
 {
 	if (P != Nil){
 		free (P);
 	}
 }
 
-void DeAlokasiTim (addressTim P)
+void DeAlokasiTeam (addressTeam P)
 /* IS : P terdefinisi */
 /* FS : P dikembalikan ke sistem */
-/* Melakukan dealokasi / pengembalian addressTim P ke system */
+/* Melakukan dealokasi / pengembalian addressTeam P ke system */
 {
 	if (P != Nil){
 		free (P);
@@ -197,7 +197,7 @@ void DelPGroup (ListGroup * L, infotype X)
 /* List mungkin menjadi kosong karena penghapusan */
 {
 	/* Kamus Lokal */
-	address P, Prec;
+	addressGroup P, Prec;
 	boolean found = false;
 	/* Algoritma */
 	Prec = Nil;
@@ -208,26 +208,26 @@ void DelPGroup (ListGroup * L, infotype X)
 		}		
 		else {
 			Prec = P;
-			P = NextGroup(P);
+			P = nextGroup(P);
 		}
 	} /* P = Nil Atau Ketemu */
 
 	if (found){
-		if (Prec == Nil && NextGroup(P) == Nil){	/* Hanya 1 elemen */
+		if (Prec == Nil && nextGroup(P) == Nil){	/* Hanya 1 elemen */
 			First(*L) = Nil;	
 		}
 		else if (Prec == Nil){	/* Ketemu di elemen 1*/
-			First(*L) = NextGroup(P);
+			First(*L) = nextGroup(P);
 		}
 		else {	/* Ketemu di elemen list yang ditengah/akhir */
-			NextGroup(Prec) = NextGroup(P);
+			nextGroup(Prec) = nextGroup(P);
 		}
-		NextGroup(P) = Nil;
+		nextGroup(P) = Nil;
 		DeAlokasiGroup (P);
 	}
 }
 
-void DelPTim (ListTim * L, infotype X)
+void DelPTeam (ListTeam * L, infotype X)
 /* IS : L sembarang */
 /* FS : Jika ada elemen list beraddress P, dengan Info(P) = X */
 /* 	Maka P dihapus dari list dan di dealokasi */
@@ -235,7 +235,7 @@ void DelPTim (ListTim * L, infotype X)
 /* List mungkin menjadi kosong karena penghapusan */
 {
 	/* Kamus Lokal */
-	addressTim P, Prec;
+	addressTeam P, Prec;
 	boolean found = false;
 	/* Algoritma */
 	Prec = Nil;
@@ -261,6 +261,6 @@ void DelPTim (ListTim * L, infotype X)
 			Next(Prec) = Next(P);
 		}
 		Next(P) = Nil;
-		DeAlokasiTim (P);
+		DeAlokasiTeam (P);
 	}
 }
