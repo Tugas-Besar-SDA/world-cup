@@ -3,7 +3,9 @@
 #include "boolean.h"
 #include <stdio.h>
 #define Nil NULL
-#define Info(P) (P)->info
+#define InfoGroup(P) (P)->infoGroup
+#define InfoTeam(P) (P)->infoTeam
+
 #define nextGroup(P) (P)->nextGroup
 #define nextGroupToTeam(P) (P)->nextGroupToTeam
 //#define Info(Q) (Q)->info
@@ -47,6 +49,8 @@ void CreateListTeam (ListTeam * L);
 /* IS : L sembarang */
 /* FS : Terbentuk ListTeam Kosong */
 
+boolean isEmptyGroup(ListGroup L);
+
 addressGroup AlokasiGroup (infotype X);
 /* Mengirimkan addressGroup hasil alokasiGroup sebuah elemen */
 /* Jika alokasiGroup berhasil, maka addressGroup != Nil, 	   */
@@ -58,6 +62,10 @@ addressTeam AlokasiTeam (infotype X);
 /* Jika AlokasiTeam berhasil, maka addressTeam != Nil, 	   */
 /*	dan misalnya menghasilkan P, maka Info(P) = X, Next(P) = Nil */
 /* Jika AlokasiTeam gagal, mengirimkan Nil */
+
+void InsertLastGroup (ListGroup * L, addressGroup P);
+
+void InsertLastTeam (ListTeam * L, addressTeam P);
 
 void InsVLastGroup (ListGroup * L, infotype X);
 /* IS : L mungkin Kosong */
