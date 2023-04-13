@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-//#include <cstring>
 #include "spnrsll.h"
-
-//program
 
 void CreateListGroup (ListGroup * L)
 /* IS : L sembarang */
@@ -20,6 +15,8 @@ void CreateListTeam (ListTeam * L)
 }
 
 boolean isEmptyGroup(ListGroup L){
+/* IS : L mungkin Nil */
+/* FS : mengembalikan nilai true jika grup belum terbentuk. Selain itu, mengembalikan nilai false*/
 	if(First(L) == Nil){
 		return true;
 	}
@@ -62,7 +59,7 @@ addressTeam AlokasiTeam (infotype X)
 		Gol(P) = 0;
 		Selisih(P) = 0;
 		Skor(P) = 0;
-		Next(P) = Nil;
+		NextTeam(P) = Nil;
 	}
 	return (P);
 }
@@ -95,10 +92,10 @@ void InsertLastTeam (ListTeam * L, addressTeam P)
 	 /* Algoritma */
 	if (First(*L) != Nil){
 		Last = First(*L);
-		while (Next(Last) != Nil){
-			Last = Next(Last); 
+		while (NextTeam(Last) != Nil){
+			Last = NextTeam(Last); 
 		}
-		Next(Last) = P;
+		NextTeam(Last) = P;
 	}
 	else{
 		First(*L) = P;
@@ -168,7 +165,7 @@ void PrintInfo (ListGroup L)
 						printf (" Gol : %d", Gol(Q));
 						printf (" Skor : %d", Skor(Q));
 						printf (" Selisih : %d\n  ", Selisih(Q));
-						Q = Next(Q);
+						Q = NextTeam(Q);
 					}	
 				}
 				P = nextGroup(P);
@@ -254,21 +251,21 @@ void DelPTeam (ListTeam * L, infotype X)
 		}		
 		else {
 			Prec = P;
-			P = Next(P);
+			P = NextTeam(P);
 		}
 	} /* P = Nil Atau Ketemu */
 
 	if (found){
-		if (Prec == Nil && Next(P) == Nil){	/* Hanya 1 elemen */
+		if (Prec == Nil && NextTeam(P) == Nil){	/* Hanya 1 elemen */
 			First(*L) = Nil;	
 		}
 		else if (Prec == Nil){	/* Ketemu di elemen 1*/
-			First(*L) = Next(P);
+			First(*L) = NextTeam(P);
 		}
 		else {	/* Ketemu di elemen list yang ditengah/akhir */
-			Next(Prec) = Next(P);
+			NextTeam(Prec) = NextTeam(P);
 		}
-		Next(P) = Nil;
+		NextTeam(P) = Nil;
 		DeAlokasiTeam (P);
 	}
 }
