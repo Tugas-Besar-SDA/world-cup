@@ -19,6 +19,14 @@ void CreateListTeam (ListTeam * L)
 	First(*L) = Nil;
 }
 
+boolean isEmptyGroup(ListGroup L){
+	if(First(L) == Nil){
+		return true;
+	}
+	
+	return false;
+}
+
 addressGroup AlokasiGroup (infotype X)
 /* Mengirimkan addressGroup hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addressGroup != Nil, 	   */
@@ -31,7 +39,7 @@ addressGroup AlokasiGroup (infotype X)
 	P = (addressGroup) malloc (sizeof (DataGroup));
 	if (P != Nil)		/* Alokasi berhasil */
 	{
-		Info(P) = X;
+		InfoGroup(P) = X;
 		nextGroup(P) = Nil;
 		nextGroupToTeam(P) = Nil;
 	}
@@ -50,7 +58,7 @@ addressTeam AlokasiTeam (infotype X)
 	P = (addressTeam) malloc (sizeof (DataTeam));
 	if (P != Nil)		/* Alokasi berhasil */
 	{
-		Info(P) = X;
+		InfoTeam(P) = X;
 		Gol(P) = 0;
 		Selisih(P) = 0;
 		Skor(P) = 0;
@@ -148,7 +156,7 @@ void PrintInfo (ListGroup L)
 				break;
 			}
 			else {	/* Belum berada di akhir ListGroup */
-				printf ("%d. %s\n  ",++i, Info(P));
+				printf ("%d. %s\n  ",++i, InfoGroup(P));
 				Q = nextGroupToTeam(P);
 				for (;;){
 					if (Q == Nil){
@@ -156,7 +164,7 @@ void PrintInfo (ListGroup L)
 						break;
 					}
 					else {
-						printf (" %s", Info(Q));
+						printf (" %s", InfoTeam(Q));
 						printf (" Gol : %d", Gol(Q));
 						printf (" Skor : %d", Skor(Q));
 						printf (" Selisih : %d\n  ", Selisih(Q));
@@ -203,7 +211,7 @@ void DelPGroup (ListGroup * L, infotype X)
 	Prec = Nil;
 	P = First(*L);
 	while ((P != Nil) && (!found)){
-		if (strcmp(Info(P), X) == 0){
+		if (strcmp(InfoGroup(P), X) == 0){
 			found = true;
 		}		
 		else {
@@ -241,7 +249,7 @@ void DelPTeam (ListTeam * L, infotype X)
 	Prec = Nil;
 	P = First(*L);
 	while ((P != Nil) && (!found)){
-		if (strcmp(Info(P), X) == 0){
+		if (strcmp(InfoTeam(P), X) == 0){
 			found = true;
 		}		
 		else {
