@@ -113,12 +113,16 @@ void DelPTeam (ListTeam * L, infotype X);
 /* ListTeam mungkin menjadi kosong karena penghapusan */
 
 
-void addGroup(ListGroup * L, addressGroup * HeadGroup);
+void addGroup(ListGroup *L, addressGroup *HeadGroup);
 
-void addTeam (ListGroup * L, ListTeam * Q, addressGroup * HeadGroup);
+void addTeam (ListGroup *L, ListTeam *Q, addressGroup *HeadGroup);
 
-void DelGroup(ListGroup * L, addressGroup * HeadGroup);
+void DelGroup(ListGroup *L, addressGroup *HeadGroup);
 
-void DelTeam(ListGroup * L, ListTeam * Q, addressGroup * HeadGroup);
+void DelTeam(ListGroup *L, ListTeam *Q, addressGroup *HeadGroup);
+
+void Pertandingan(addressTeam *M, addressTeam *N);
+void KalkulasiPoin(addressTeam *V, addressTeam *M);
+void GroupStage(addressGroup A);
 
 #endif
