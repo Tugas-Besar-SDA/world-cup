@@ -114,6 +114,11 @@ void DelPTeam (ListTeam * L, infotype X);
 
 
 void addGroup(ListGroup * L, addressGroup * HeadGroup);
+
 void addTeam (ListGroup * L, ListTeam * Q, addressGroup * HeadGroup);
+
 void DelGroup(ListGroup * L, addressGroup * HeadGroup);
+
+void DelTeam(ListGroup * L, ListTeam * Q, addressGroup * HeadGroup);
+
 #endif
