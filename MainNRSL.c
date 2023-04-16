@@ -16,23 +16,22 @@ int main(){
 		if(!isEmptyGroup(MyListGroup)){
 			PrintInfo (MyListGroup);
 		}
-		
 		printf("Pilih opsi\n1. Tambah grup\n2. Tambah tim\n3. Delete grup\n4. Delete tim\n0. Exit\nMasukkan pilihan Anda: ");
-	    scanf("%d", &pilihMenu);
-	    switch(pilihMenu) {
+	    	scanf("%d", &pilihMenu);
+		switch(pilihMenu) {
 	    	case 1:
 	    		addGroup(&MyListGroup, &HeadGroup);
-			break;
+		break;
 	    	break;
 	    	case 2:
 	    		addTeam(&MyListGroup, &MyListTim, &HeadGroup);
 	    	break;
 	    	case 3:
 	    		DelGroup(&MyListGroup, &HeadGroup);
-		    break;
-		    case 4:
+		break;
+		case 4:
 		    	DelTeam(&MyListGroup, &MyListTim, &HeadGroup);
-		    break;
+		break;
 	    	case 0:
 	    		exit(0);
 	    	break;
