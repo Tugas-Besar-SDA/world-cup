@@ -539,3 +539,143 @@ void DelPTeam (ListTeam * L, infotype X)
 		DeAlokasiTeam (P);
 	}
 }
+
+void addGroup(ListGroup * L, addressGroup * HeadGroup){
+	infotype groupName;
+	groupName = (char*) malloc (20 * sizeof (char));
+	printf("Silahkan masukan nama grup : ");
+	scanf("%s",groupName);
+	//validasi jika nama groupName sudah tersedia, jika belum akan di tambahkan ke MyListGroup
+	for(;;){
+		if(isEmptyGroup(*L)){
+			InsVLastGroup(&(*L), groupName);
+			//JumlahGroup++;
+			break;
+		}else if (strcmp(groupName, InfoGroup(*HeadGroup)) == 0){
+			printf("Nama grup %s sudah tersedia \n", groupName);
+			system("pause");
+			break;
+		}
+		else {
+			if (nextGroup(*HeadGroup) == Nil){
+				InsVLastGroup(&(*L), groupName);
+				//JumlahGroup++;
+				printf("Nama grup %s sudah tersedia \n", groupName);
+				break;
+			}
+			*HeadGroup = nextGroup(*HeadGroup);
+		}
+	}
+	*HeadGroup = First(*L);
+}
+
+void addTeam (ListGroup * L, ListTeam * Q, addressGroup * HeadGroup){
+	infotype groupName, teamName;
+	if(isEmptyGroup(*L)){
+		printf("\nList kosong!\n\n");
+		system("pause");
+	}else{
+		groupName = (char*) malloc (20 * sizeof (char));
+		printf("Silahkan pilih nama grup : ");
+		scanf("%s", groupName);
+		//validasi apakah nama groupName sudah tersedia atau tidak
+		for(;;){
+			//jika groupName ada maka akan disuruh input teamName Kemudian di simpan di MyListTim 
+			if (strcmp(groupName, InfoGroup(*HeadGroup)) == 0){
+				teamName = (char*) malloc (20 * sizeof (char));
+				printf("Silahkan masukan nama tim : ");
+				scanf("%s", teamName);
+				//jika MyListGroup belum tersambung sama sekali
+				if (nextGroupToTeam(*HeadGroup) == Nil){
+					CreateListTeam(&(*Q));
+					InsVLastTeam(&(*Q), teamName);
+					nextGroupToTeam(*HeadGroup) = First(*Q); //menyambungkan MyListGroup dengan MylistMhs
+					break;
+				}
+				//jika MyListGroup sudah tersambung (melanjutkan MyListTim)
+				else {
+					First(*Q) = nextGroupToTeam(*HeadGroup); //agar MyListTim nya sesuai diinput di groupName yang di inginkan
+					InsVLastTeam(&(*Q),teamName);
+					break;
+				}
+			}
+			else {
+				if (nextGroup(*HeadGroup) == Nil){ //jika next groupName == Nil (tidak ketemu)
+					printf("Nama grup %s tidak tersedia\n", groupName);
+					system("pause");
+					break;
+				}
+				//looping next groupName
+				*HeadGroup = nextGroup(*HeadGroup);
+			}
+		}
+	}
+	//mengubah HeadGroup menjadi menujuk lagi ke list groupName yang pertama
+	*HeadGroup = First(*L);	
+}
+
+
+void DelGroup(ListGroup * L, addressGroup * HeadGroup){
+	infotype groupName;
+	if(isEmptyGroup(*L)){
+		printf("\nList kosong!\n\n");
+		system("pause");
+	}else{
+		groupName = (char*) malloc (20 * sizeof (char));
+		printf("\nSilahkan ketikan nama grup yang akan di delete : ");
+		scanf("%s", groupName);
+		//validasi jika yang di hapus list pertama
+		if (strcmp(InfoGroup(*HeadGroup), groupName) == 0){
+			*HeadGroup = nextGroup(*HeadGroup); //HeadGroup di isi list groupName yang kedua
+			First(*L) = *HeadGroup; //HeadGroup (groupName ke 2) dijadikan first
+		}
+		DelPGroup(&(*L),groupName); //dealloc
+//		JumlahGroup--;
+	}
+}
+
+void DelTeam(ListGroup * L, ListTeam * Q, addressGroup * HeadGroup){
+	infotype groupName, teamName;
+	if(isEmptyGroup(*L)){
+		printf("\nList kosong!\n\n");
+		system("pause");
+	}else{
+		groupName = (char*) malloc (20 * sizeof (char));
+		printf("Silahkan pilih nama grup : ");
+		scanf("%s", groupName);
+		//validasi apakah nama groupName sudah tersedia atau tidak
+		for(;;){
+			//jika groupName ada maka akan disuruh input teamName
+			if (strcmp(InfoGroup(*HeadGroup), groupName) == 0){
+				//cek apakah terdapat list team atau tidak
+				if (nextGroupToTeam(*HeadGroup) == Nil){
+					printf("\nList kosong!\n\n");
+					system("pause");
+					break;
+				}
+				teamName = (char*) malloc (20 * sizeof (char));
+				printf("\nSilahkan ketikan nama tim yang akan di delete : ");
+				scanf("%s",teamName);
+				First(*Q) = nextGroupToTeam(*HeadGroup); //agar MyListTim nya sesuai diinput di groupName yang di inginkan
+				//validasi jika yang di hapus list pertama
+        		if(strcmp(InfoTeam(First(*Q)), teamName) == 0){
+        			First(*Q) = NextTeam(First(*Q)); //list kedua menjadi first
+        			nextGroupToTeam(*HeadGroup) = First(*Q); //di kaitkan First yang baru ke list groupName
+        			break;
+				}
+				DelPTeam(&(*Q),teamName); //dealloc
+				break;
+			}else{
+				if (nextGroup(*HeadGroup) == Nil){ //jika next groupName == Nil (tidak ketemu)
+					printf("Nama grup %s tidak tersedia\n",groupName);
+					system("pause");
+					break;
+				}
+				//looping next groupName
+				*HeadGroup = nextGroup(*HeadGroup);
+			}
+		}
+		//mengubah HeadGroup menjadi menujuk lagi ke list groupName yang pertama
+		*HeadGroup = First(*L);
+	}
+}
