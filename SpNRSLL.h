@@ -112,8 +112,8 @@ void DelPTeam (ListTeam * L, infotype X);
 /* Jika tidak ada elemen ListTeam dengan Info(P) = X, maka ListTeam tetap */
 /* ListTeam mungkin menjadi kosong karena penghapusan */
 
+
 void addGroup(ListGroup * L, addressGroup * HeadGroup);
 void addTeam (ListGroup * L, ListTeam * Q, addressGroup * HeadGroup);
 void DelGroup(ListGroup * L, addressGroup * HeadGroup);
-
 #endif
