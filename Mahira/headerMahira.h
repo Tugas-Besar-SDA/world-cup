@@ -7,5 +7,6 @@
 void Pertandingan(addressTeam *M, addressTeam *N);
 void KalkulasiPoin(addressTeam *V, addressTeam *M);
 void GroupStage(addressGroup A);
+void GroupWinner(addressGroup A, addressTeam *M, addressTeam *N);
 
 #endif
