@@ -52,3 +52,77 @@ void GroupStage(addressGroup A)
 		i++;
 	}
 }
+
+void GroupWinner(addressGroup A, addressTeam *M, addressTeam *N)
+{
+	addressTeam B, C;
+	int undi;
+	
+	*M = (addressTeam) malloc (sizeof (DataTeam));
+	*N = (addressTeam) malloc (sizeof (DataTeam));
+	B = nextGroupToTeam(A);
+	C = NextTeam(B);
+	while(C != Nil)
+	{
+	if(Skor(B) > Skor(C))
+	{
+//		*N = C;
+		C = NextTeam(C);
+	}
+	else if(Skor(B) < Skor(C))
+	{
+		*N = B;
+		B = C;
+		C = NextTeam(C);
+	}
+	else 
+//	if(Skor(B) == Skor(C))
+	{
+		if(Selisih(B) > Selisih(C))
+		{
+			C = NextTeam(C);
+		}
+		else if(Selisih(B) < Selisih(C))
+		{
+			*N = B;
+			B = C;
+			C = NextTeam(C);
+		}
+		else 
+//		if(Selisih(B) == Selisih(C))
+		{
+			if(Gol(B) > Gol(C))
+			{
+				C = NextTeam(C);
+			}
+			else if(Gol(B) < Gol(C))
+			{
+				*N = B;
+				B = C;
+				C = NextTeam(C);
+			}
+			else 
+//			if(Gol(B) == Gol(C))
+			{
+				while(undi == 0)
+				{
+					undi = rand()%2;
+					if(undi == 1)
+					{
+						*N = B;
+					}
+					else if(undi == 2)
+					{
+						*N = C;
+					}
+				}
+				
+			}
+		}
+	}
+	*M = B;
+//	*N = C;
+	}
+//	*M = *N;
+//	*M = B;
+}
