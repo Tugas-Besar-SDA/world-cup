@@ -37,7 +37,7 @@ void prosesBabakGugur(){
 	/* Hasil dari pertandingan */
 	system("cls");
 	printf("\n\n\n\n\n\t==================================================\n");
-	printf("           |\t\t   CHAMPION: %s\t\t |", root->value);
+	printf("        |\t\t   CHAMPION: %s\t\t |", root->value);
 	printf("\n\t==================================================\n");
 }
 
