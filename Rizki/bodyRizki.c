@@ -1,4 +1,5 @@
 #include "headerRizki.h"
+#include "..\Mahira\headerMahira.h"
 
 /* Pembuatan tree */
 addressNode create_node(int number) {

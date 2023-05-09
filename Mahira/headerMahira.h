@@ -3,10 +3,20 @@
 
 #include "..\Adi\headerAdi.h"
 #include "..\Rizki\headerRizki.h"
+#include "..\boolean.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <stdbool.h>
+#include <time.h>
 
-void Pertandingan(addressTeam *M, addressTeam *N);
-void KalkulasiPoin(addressTeam *V, addressTeam *M);
-void GroupStage(addressGroup A);
+//mahira
+void Match(addressTeam *M, addressTeam *N);
+void PointCalculation(addressTeam *V, addressTeam *M);
+void MatchInGroup(addressTeam *B, addressTeam *C);
+void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D);
+//void GroupStage(addressGroup A);
 void GroupWinner(addressGroup A, addressTeam *M, addressTeam *N);
 
 #endif

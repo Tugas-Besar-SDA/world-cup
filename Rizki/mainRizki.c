@@ -1,4 +1,5 @@
-#include "headerRizki.h"
+//#include "headerRizki.h"
+#include "..\Mahira\headerMahira.h"
 
 int main(){
 	// Inisialisasi seed dengan waktu saat ini

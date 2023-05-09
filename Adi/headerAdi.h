@@ -1,8 +1,8 @@
 #ifndef headerAdi_H
 #define headerAdi_H
 
-#include "..\Mahira\headerMahira.h"
-#include "..\Rizki\headerRizki.h"
+//#include "..\Mahira\headerMahira.h"
+//#include "..\Rizki\headerRizki.h"
 #include "..\boolean.h"
 #include <stdio.h>
 #include <string.h>

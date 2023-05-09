@@ -1,4 +1,5 @@
-#include "headerAdi.h"
+//#include "headerAdi.h"
+#include "..\Mahira\headerMahira.h"
 
 int main(){
 	//kamus data
@@ -14,7 +15,7 @@ int main(){
 	for(;;){
 		system("cls");
 		if(!isEmptyGroup(MyListGroup)){
-			PrintInfo (MyListGroup);
+			PrintInfo(MyListGroup);
 		}
 		printf("Pilih opsi\n1. Tambah grup\n2. Tambah tim\n3. Delete grup\n4. Delete tim\n5. Pertandingan Group \n0. Exit\nMasukkan pilihan Anda: ");
 	    	scanf("%d", &pilihMenu);

@@ -1,15 +1,15 @@
-# Project: Mahira
+# Project: Rizki
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = mainMahira.o bodyMahira.o ../Adi/bodyAdi.o ../Rizki/bodyRizki.o
-LINKOBJ  = mainMahira.o bodyMahira.o ../Adi/bodyAdi.o ../Rizki/bodyRizki.o
+OBJ      = mainRizki.o bodyRizki.o
+LINKOBJ  = mainRizki.o bodyRizki.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -g3 -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = Mahira.exe
+BIN      = Rizki.exe
 CXXFLAGS = $(CXXINCS) -g3 -g3
 CFLAGS   = $(INCS) -g3 -g3
 RM       = rm.exe -f
@@ -24,14 +24,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-mainMahira.o: mainMahira.c
-	$(CC) -c mainMahira.c -o mainMahira.o $(CFLAGS)
+mainRizki.o: mainRizki.c
+	$(CC) -c mainRizki.c -o mainRizki.o $(CFLAGS)
 
-bodyMahira.o: bodyMahira.c
-	$(CC) -c bodyMahira.c -o bodyMahira.o $(CFLAGS)
-
-../Adi/bodyAdi.o: ../Adi/bodyAdi.c
-	$(CC) -c ../Adi/bodyAdi.c -o ../Adi/bodyAdi.o $(CFLAGS)
-
-../Rizki/bodyRizki.o: ../Rizki/bodyRizki.c
-	$(CC) -c ../Rizki/bodyRizki.c -o ../Rizki/bodyRizki.o $(CFLAGS)
+bodyRizki.o: bodyRizki.c
+	$(CC) -c bodyRizki.c -o bodyRizki.o $(CFLAGS)
