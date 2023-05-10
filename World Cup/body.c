@@ -673,7 +673,7 @@ void WinnerList(addressTeam P, addressTeam Q)
 	//jika file tidak dapat dibuka
 	if(fileP == NULL)
 	{
-		printf("\n2. File tidak bisa terbuka!\n");
+		printf("\nFile tidak bisa terbuka!\n");
 	}
 	else
 	{
@@ -699,7 +699,7 @@ void OpenListOfWinner()
 	tim = (infotype) malloc (3 * sizeof(char));
 	if(fileP == NULL)
 	{
-		printf("\n1. File tidak bisa terbuka!\n");
+		printf("\nFile tidak bisa terbuka!\n");
 	}
 	else
 	{
