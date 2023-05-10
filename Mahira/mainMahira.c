@@ -40,9 +40,9 @@ int main()
 		{
 			case 1:
 			{
-				
 				if(!isEmptyGroup(MyListGroup))
 				{
+					system("cls");
 					PrintInfo(MyListGroup);
 				}
 				printf("\t\t     ");
@@ -76,6 +76,7 @@ int main()
 							{
 								GroupStage(MyListGroup);
 								A = First(MyListGroup);
+								formatFileBefore();
 								do
 								{
 									GroupWinner(A, &P, &Q);
