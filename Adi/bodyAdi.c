@@ -455,10 +455,11 @@ void ReadTeam(ListGroup * L){
 void AboutTeam(){
 	//kamus data
 	FILE *file;
-	char buffer[100];
+	infotype buffer;
 	
 	//program
 	system("cls");
+	buffer = (infotype) malloc (100 * sizeof(char));
 	file = fopen("AboutTeam.txt", "r");
 	if (file == NULL) {
 		printf("File tidak dapat dibuka.\n");
