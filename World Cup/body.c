@@ -124,19 +124,19 @@ void PrintInfo (ListGroup L){
 				break;
 			}
 			else {	//Belum berada di akhir ListGroup
-				printf("\t\t-----------\n");
-				printf ("\t\t| Group %s |\n", InfoGroup(P));
-				printf("\t\t-----------\n");
+				printf("\t\t\t\t\t\t\t-----------------------------------------------\n");
+				printf ("\t\t\t\t\t\t\t|\t\t    Group %s\t\t      |\n", InfoGroup(P));
+				//printf("\t\t-----------\n");
 				Q = nextGroupToTeam(P);
 				for (;;){
 					if (Q == Nil){
-						printf("-----------------------------------------------\n");
+						printf("\t\t\t\t\t\t\t-----------------------------------------------\n");
 						printf("\n");
 						break;
 					}
 					else {
-						printf("-----------------------------------------------\n");
-						printf ("| Team %s |", InfoTeam(Q));
+						printf("\t\t\t\t\t\t\t-----------------------------------------------\n");
+						printf ("\t\t\t\t\t\t\t| Team %s |", InfoTeam(Q));
 						printf (" Gol : %d |", Gol(Q));
 						printf (" Skor : %d |", Skor(Q));
 						printf (" Selisih : %d |\n", Selisih(Q));
