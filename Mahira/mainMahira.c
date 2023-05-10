@@ -5,31 +5,14 @@ int main()
 	//kamus data
 	ListGroup MyListGroup, F;
 	ListTeam MyListTim;
-	addressTeam K, L, M, N, O, P, Q, B, C;
+	addressTeam K, L, M, N, O, P, Q, B, C, R, S, T;
 	addressGroup A, G, H, HeadGroup;
 	addressNode root;
 	char pilih;
-	int i = 1, menu, height, maxNode, maxNodeFullTree, arr[maxNodeFullTree];
+	int i = 1, menu, height, maxNode, maxNodeFullTree, arr[maxNodeFullTree], SumOfTeam, SumOfMatch;
 	
 	CreateListGroup(&MyListGroup);
-	A = AlokasiGroup("A");
-	G = AlokasiGroup("B");
 	
-	K = AlokasiTeam("GER");
-	L = AlokasiTeam("ARG");
-	M = AlokasiTeam("NED");
-	N = AlokasiTeam("CRO");
-	O = AlokasiTeam("JPN");
-	
-	First(F) = A;
-//	nextGroup(A) = G;
-	nextGroupToTeam(A) = K;
-	NextTeam(K)	= L;
-	NextTeam(L)	= M;
-	
-//	NextTeam(M)	= N;
-	NextTeam(N)	= O;
-	MatchInGroup(&K, &L);
 	B = (addressTeam) malloc (sizeof (DataTeam));
 	C = (addressTeam) malloc (sizeof (DataTeam));
 	B = Nil;
@@ -41,11 +24,16 @@ int main()
 	{
 		system("cls");
 		printf("\n");
-		printf("1. List Group\n");
-		printf("2. Group Stage\n");
-		printf("3. Knockout Stage\n");
-		printf("4. Add and Delete Group Team\n");
-		printf("0. Exit\n");
+		printf("\n\t\t=============================================\n");
+		printf("\t\t\t\t  WORLD CUP");
+		printf("\n\t\t=============================================\n");
+		printf("\n\t\t\t   1. List Group\n");
+		printf("\t\t\t   2. Group Stage\n");
+		printf("\t\t\t   3. Knockout Stage\n");
+		printf("\t\t\t   4. Add and Delete Group Team\n");
+		printf("\t\t\t   0. Exit\n");
+		printf("\n\t\t=============================================\n");
+		printf("\n\t\t     Pilih menu: ");
 		scanf("%d", &menu);
 		switch(menu)
 		{
@@ -55,6 +43,7 @@ int main()
 				{
 					PrintInfo(MyListGroup);
 				}
+				printf("\t\t     ");
 				system("pause");
 				break;
 			}
@@ -64,33 +53,43 @@ int main()
 				{
 					system("cls");
 					printf("\n");
-					printf("1. Match Button\n");
-					printf("2. Next Match\n");
-					printf("99. Back to menu\n");
+					printf("\n\t\t=============================================\n");
+					printf("\t\t\t\t GROUP STAGE");
+					printf("\n\t\t=============================================\n");
+					printf("\n\t\t\t     1. Match Button\n");
+					printf("\t\t\t     2. Group Winner\n");
+					printf("\t\t\t     99. Back to menu\n");
+					printf("\n\t\t=============================================\n");
+					printf("\n\t\t     Pilih menu: ");
 					scanf("%d", &menu);
 					switch(menu)
 					{
 						case 1:
 						{
-							do
+							if(First(MyListGroup) == Nil)
 							{
-								if(H != Nil)
+								printf("\t\t     Tidak ada tim untuk ditandingkan\n");
+							}
+							else
+							{
+								GroupStage(MyListGroup);
+								A = First(MyListGroup);
+								do
 								{
-									printf("Pertandingan di luar %d Group = %s\n", i, InfoGroup(A));
-								}
-									MatchButton(F, &H, &B, &C);
-									printf("Menonton pertandingan? [y/t]\n");
-									scanf(" %c", &pilih);
-								i++;
-							}while(pilih == 'y');
-//							MatchButton(F, &H, &B, &C);
-//							MyListGroup
+									GroupWinner(A, &P, &Q);
+									WinnerList(P, Q);
+									A = nextGroup(A);
+								}while(A != Nil);
+							}
+							printf("\t\t     ");
 							system("pause");
 							break;
 						}
 						case 2:
 						{
-//							next match pokonya
+							OpenListOfWinner();
+							printf("\t\t     ");
+							system("pause");
 							break;
 						}
 					}
@@ -98,21 +97,9 @@ int main()
 			}
 			case 3:
 			{
-				height = tree_height(maxNode); // kalau 31 node (16 tim) berarti height = 4
-			    maxNodeFullTree = pow(2, height+1) - 1;
-			    arr[maxNodeFullTree];
-			
-			    for (i = 0; i < maxNodeFullTree; i++) {
-			        if (i < maxNode) {
-			            arr[i] = i+1;
-			        } else {
-			            arr[i] = 0;
-			        }
-			    }
-			
-			    root = build_tree(arr, 0, maxNodeFullTree-1);
-			    
-			    babakGugur(root, maxNode);
+				srand(time(NULL));
+				prosesBabakGugur();
+				system("pause");
 				break;
 			}
 			case 4:
@@ -125,11 +112,16 @@ int main()
 						PrintInfo(MyListGroup);
 					}
 					printf("\n");
-					printf("1. Add Group\n");
-					printf("2. Add Team\n");
-					printf("3. Delete Group\n");
-					printf("4. Delete Team\n");
-					printf("99. Back to menu\n");
+					printf("\n\t\t=============================================\n");
+					printf("\t\t\t\t ADD AND DELETE");
+					printf("\n\t\t=============================================\n");
+					printf("\n\t\t\t\t1. Add Group\n");
+					printf("\t\t\t\t2. Add Team\n");
+					printf("\t\t\t\t3. Delete Group\n");
+					printf("\t\t\t\t4. Delete Team\n");
+					printf("\t\t\t\t99. Back to menu\n");
+					printf("\n\t\t=============================================\n");
+					printf("\n\t\t     Pilih menu: ");
 					scanf("%d", &menu);
 					switch(menu)
 					{
@@ -158,46 +150,5 @@ int main()
 			}
 		}
 	}while(menu != 0);
-	
-//	First(F) = A;
-////	nextGroup(A) = G;
-//	nextGroupToTeam(A) = K;
-//	NextTeam(K)	= L;
-//	NextTeam(L)	= M;
-//	
-//	NextTeam(M)	= N;
-//	NextTeam(N)	= O;
-//	MatchInGroup(&K, &L);
-//	B = (addressTeam) malloc (sizeof (DataTeam));
-//	C = (addressTeam) malloc (sizeof (DataTeam));
-//	B = Nil;
-//	C = Nil;
-//	H = (addressGroup) malloc (sizeof (DataGroup));
-//	do
-//	{
-//		if(H != Nil)
-//		{
-////			printf("H = %s\n", H);
-//			printf("Pertandingan di luar %d Group = %s\n", i, InfoGroup(A));
-//		}
-//			MatchButton(F, &H, &B, &C);
-////			printf("Pertandingan selanjutnya\n %s VS %s\n", InfoTeam(B), InfoTeam(C));
-//			printf("Menonton pertandingan? [y/t]\n");
-//			scanf(" %c", &pilih);
-//		i++;
-//	}while(pilih == 'y');
-////	GroupStage(A);
-//	
-//	printf("\n");
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(K), Skor(K), Gol(K), Selisih(K));
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(L), Skor(L), Gol(L), Selisih(L));
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(M), Skor(M), Gol(M), Selisih(M));
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(N), Skor(N), Gol(N), Selisih(N));
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(O), Skor(O), Gol(O), Selisih(O));
-//	
-//	GroupWinner(A, &P, &Q);
-//	printf("\nJuara Grup\n");
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(P), Skor(P), Gol(P), Selisih(P));
-//	printf("Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(Q), Skor(Q), Gol(Q), Selisih(Q));
 	return 0;
 }

@@ -16,7 +16,10 @@ void Match(addressTeam *M, addressTeam *N);
 void PointCalculation(addressTeam *V, addressTeam *M);
 void MatchInGroup(addressTeam *B, addressTeam *C);
 void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D);
-//void GroupStage(addressGroup A);
 void GroupWinner(addressGroup A, addressTeam *M, addressTeam *N);
+int CountTeam(addressGroup *A);
+void WinnerList(addressTeam P, addressTeam Q);
+void OpenListOfWinner();
+void GroupStage(ListGroup MyListGroup);
 
 #endif
