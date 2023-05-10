@@ -97,9 +97,9 @@ int main()
 			}
 			case 3:
 			{
-				srand(time(NULL));
-				prosesBabakGugur();
-				system("pause");
+// 				srand(time(NULL));
+// 				prosesBabakGugur();
+// 				system("pause");
 				break;
 			}
 			case 4:
