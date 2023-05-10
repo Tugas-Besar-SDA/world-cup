@@ -51,6 +51,7 @@ void MatchInGroup(addressTeam *B, addressTeam *C)
 
 void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D)
 {
+	
 	if(*C == Nil && *D == Nil)
 	{
 		*B = First(A);

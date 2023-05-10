@@ -87,7 +87,7 @@ int calculateLevelTree(addressNode root){
 void formatFile(){
 	FILE *file;
 	
-	file = fopen("pemenangFaseGrup(after).txt", "w");
+	file = fopen("..\\Rizki\\pemenangFaseGrup(after).txt", "w");
 	fclose(file);
 }
 
@@ -96,7 +96,7 @@ void sortTeamFromGroup(){
 	int i, j = 0, cursorFile2;
 	infotype buffer1, buffer2, buffer3, buffer4;
 	
-	file1 = fopen("pemenangFaseGrup(before).txt", "r");
+	file1 = fopen("..\\Mahira\\pemenangFaseGrup(before).txt", "r");
 	if(file1 == NULL){
 		printf("File tidak bisa dibuka");
 	}else{
@@ -116,7 +116,7 @@ void sortTeamFromGroup(){
 			fscanf(file1, "%s", buffer3);
 			fseek(file1, j - 5, SEEK_SET);
 			fscanf(file1, "%s", buffer4);
-			file2 = fopen("pemenangFaseGrup(after).txt", "a");
+			file2 = fopen("..\\Rizki\\pemenangFaseGrup(after).txt", "a");
 			if(file2 == NULL){
 				printf("File tidak bisa dibuka");
 			}else{
@@ -142,7 +142,7 @@ int countingTeams(){
 	FILE *file;
 	infotype buffer;
 	
-	file = fopen("pemenangFaseGrup(before).txt", "r");
+	file = fopen("..\\Mahira\\pemenangFaseGrup(before).txt", "r");
 	if(file == NULL){
 		printf("File tidak bisa dibuka");
 	}else{
@@ -165,7 +165,7 @@ void inputTim(addressNode root, int maxNode){
     int i = 1;
     addressNode Psearch;
 
-    file = fopen("pemenangFaseGrup(after).txt", "r");
+    file = fopen("..\\Rizki\\pemenangFaseGrup(after).txt", "r");
 
     if(file == NULL){
         printf("\nFile tidak bisa terbuka!\n");

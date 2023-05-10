@@ -406,7 +406,7 @@ void ReadTeam(ListGroup * L){
     int i,cursor = 0;
     
     //program
-    file = fopen("DaftarTeam.txt", "r");
+    file = fopen("..\\Adi\\DaftarTeam.txt", "r");
     if (file == NULL) {
         printf("File tidak dapat dibuka.\n");
         exit(EXIT_FAILURE);

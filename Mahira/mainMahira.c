@@ -18,6 +18,7 @@ int main()
 	B = Nil;
 	C = Nil;
 	H = (addressGroup) malloc (sizeof (DataGroup));
+	ReadTeam(&MyListGroup);
 	
 	//program
 	do
@@ -39,6 +40,7 @@ int main()
 		{
 			case 1:
 			{
+				
 				if(!isEmptyGroup(MyListGroup))
 				{
 					PrintInfo(MyListGroup);
@@ -92,14 +94,20 @@ int main()
 							system("pause");
 							break;
 						}
+						case 99:
+						{
+							menu = 99;
+							break;
+						}
 					}
 				}while(menu != 99);
+				break;
 			}
 			case 3:
 			{
-// 				srand(time(NULL));
-// 				prosesBabakGugur();
-// 				system("pause");
+				srand(time(NULL));
+				prosesBabakGugur();
+				system("pause");
 				break;
 			}
 			case 4:
@@ -127,26 +135,38 @@ int main()
 					{
 						case 1:
 						{
-							addGroup(&MyListGroup, &HeadGroup);
+							MenuAddGroup(&MyListGroup);
 							break;
 						}
 						case 2:
 						{
-							addTeam(&MyListGroup, &MyListTim, &HeadGroup);
+							MenuAddTeam(&MyListGroup);
 							break;
 						}
 						case 3:
 						{
-							DelGroup(&MyListGroup, &HeadGroup);
+							MenuDelGroup(&MyListGroup);
 							break;
 						}
 						case 4:
 						{
-							DelTeam(&MyListGroup, &MyListTim, &HeadGroup);
+							MenuDelTeam(&MyListGroup);
+							break;
+						}
+						case 99:
+						{
+							menu = 99;
+							break;
+						}
+						default:
+						{
+							printf("Kesalahan input! Menu %d tidak tersedia \n", menu);
+							system("pause");
 							break;
 						}
 					}
 				}while(menu != 99);
+				break;
 			}
 		}
 	}while(menu != 0);
