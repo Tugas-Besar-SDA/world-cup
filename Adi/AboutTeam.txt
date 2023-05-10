@@ -1,0 +1,32 @@
+QAT: Qatar
+SWE: Sweden
+BRA: Brazil
+IRI: Iran
+MEX: Mexico
+POR: Portugal
+DEN: Denmark
+PAN: Panama
+ENG: England
+POL: Poland
+SEN: Senegal
+CRO: Croatia
+AUS: Australia
+BEL: Belgium
+NGA: Nigeria
+ARG: Argentina
+PER: Peru
+RUS: Russia
+JPN: Japan
+KSA: Saudi Arabia
+FRA: France
+NOR: Norway
+ITA: Italy
+CHI: Chile
+EGY: Egypt
+CRC: Costa Rica
+KOR: South Korea
+GER: Germany
+ESP: Spain
+NED: Netherlands
+NZL: New Zealand
+NIR: Northern Ireland
