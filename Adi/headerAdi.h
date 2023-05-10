@@ -1,9 +1,7 @@
 #ifndef headerAdi_H
 #define headerAdi_H
 
-//#include "..\Mahira\headerMahira.h"
-//#include "..\Rizki\headerRizki.h"
-#include "..\boolean.h"
+#include "boolean.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -60,18 +58,22 @@ boolean isEmptyGroup(ListGroup L);
 addressGroup AlokasiGroup (infotype X);
 /* Mengirimkan addressGroup hasil alokasiGroup sebuah elemen */
 /* Jika alokasiGroup berhasil, maka addressGroup != Nil, 	   */
-/*	dan misalnya menghasilkan P, maka Info(P) = X, nextGroup(P) = Nil, nextGroupToTeam(P) = Nil */
+/*	dan misalnya menghasilkan P, maka InfoGroup(P) = X, nextGroup(P) = Nil, nextGroupToTeam(P) = Nil */
 /* Jika alokasiGroup gagal, mengirimkan Nil */
 
 addressTeam AlokasiTeam (infotype X);
 /* Mengirimkan addressTeam hasil AlokasiTeam sebuah elemen */
 /* Jika AlokasiTeam berhasil, maka addressTeam != Nil, 	   */
-/*	dan misalnya menghasilkan P, maka Info(P) = X, Next(P) = Nil */
+/*	dan misalnya menghasilkan P, maka InfoTeam(P) = X, NextTeam(P) = Nil, Gol(P) = 0, Skor(P) = 0, Selisih(P) = 0 */
 /* Jika AlokasiTeam gagal, mengirimkan Nil */
 
 void InsertLastGroup (ListGroup * L, addressGroup P);
+/* IS : L sembarang, P sudah dialokasi */
+/* FS : P ditambahkan sebagai elemen terakhir yang baru */
 
 void InsertLastTeam (ListTeam * L, addressTeam P);
+/* IS : L sembarang, P sudah dialokasi */
+/* FS : P ditambahkan sebagai elemen terakhir yang baru */
 
 void InsVLastGroup (ListGroup * L, infotype X);
 /* IS : L mungkin Kosong */
@@ -88,7 +90,7 @@ void InsVLastTeam (ListTeam * L, infotype X);
 void PrintInfo (ListGroup L);
 /* IS : L mungkin kosong */
 /* FS : Jika List tidak kosong, semua info yang disimpan pada elemen list */
-/*	diprint. Jika list kosong, hanya menuliskan "List Kosong" */
+/*	diprint. Jika list kosong, hanya menuliskan "List Kosong.." */
 
 void DeAlokasiGroup (addressGroup P);
 /* IS : P terdefinisi */
@@ -102,25 +104,44 @@ void DeAlokasiTeam (addressTeam P);
 
 void DelPGroup (ListGroup * L, infotype X);
 /* IS : L sembarang */
-/* FS : Jika ada elemen listGroup beraddress P, dengan Info(P) = X */
-/* 	Maka P dihapus dari listGroup dan di dealokasi */
-/* Jika tidak ada elemen listGroup dengan Info(P) = X, maka listGroup tetap */
+/* FS : Jika ada elemen ListGroup beraddress P, dengan InfoGroup(P) = X */
+/* 	Maka P dihapus dari ListGroup dan di dealokasi */
+/* Jika tidak ada elemen ListGroup dengan InfoGroup(P) = X, maka ListGroup tetap */
 /* listGroup mungkin menjadi kosong karena penghapusan */
 
 void DelPTeam (ListTeam * L, infotype X);
 /* IS : L sembarang */
-/* FS : Jika ada elemen ListTeam beraddressMhs P, dengan Info(P) = X */
+/* FS : Jika ada elemen ListTeam beraddress P, dengan InfoTeam(P) = X */
 /* 	Maka P dihapus dari ListTeam dan di dealokasi */
-/* Jika tidak ada elemen ListTeam dengan Info(P) = X, maka ListTeam tetap */
+/* Jika tidak ada elemen ListTeam dengan InfoTeam(P) = X, maka ListTeam tetap */
 /* ListTeam mungkin menjadi kosong karena penghapusan */
 
+void MenuAddGroup(ListGroup * L);
+/* IS : L Sembarang*/
+/* FS : Menambah group pada ListGroup, yang di inputkan langsung oleh user */
 
-void addGroup(ListGroup *L, addressGroup *HeadGroup);
+void MenuAddTeam(ListGroup * L);
+/* IS : L Sembarang*/
+/* FS : Menambah team di sebuah group yang akan dipilih user dari ListGroup yang tersedia*/
+/* group dan team akan di inputkan langsung oleh user*/
 
-void addTeam (ListGroup *L, ListTeam *Q, addressGroup *HeadGroup);
+void MenuDelGroup(ListGroup * L);
+/* IS : L Sembarang*/
+/* FS : Menghapus group pada ListGroup, yang di inputkan langsung oleh user group mana yang akan di hapus */
 
-void DelGroup(ListGroup *L, addressGroup *HeadGroup);
+void MenuDelTeam(ListGroup * L);
+/* IS : L Sembarang*/
+/* FS : Menghapus team di sebuah group yang akan dipilih user dari ListGroup yang tersedia */
+/* group dan team akan di inputkan langsung oleh user */
 
-void DelTeam(ListGroup *L, ListTeam *Q, addressGroup *HeadGroup);
+void ReadTeam(ListGroup * L);
+/* IS : L Sembarang*/
+/* FS : Menyimpan nama-nama group yang di baca dari file "DaftarTeam.txt" dan akan di simpan di listGroup */
+/* dan juga menyimpan nama-nama team ke listTeam, kemudian list team akan di sambungkan dengan listGroup. */
+/* Setiap group mempunyai listTeamnya masing-masing */
+
+void AboutTeam();
+/* IS : - */
+/* FS : Menampilkan output mengenai tentang info kode alpha-3 zero yang digunakan setiap negara yang mengikuti world cup */
 
 #endif
