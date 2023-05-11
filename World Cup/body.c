@@ -696,20 +696,43 @@ void OpenListOfWinner()
 	//kamus data lokal
 	FILE *fileP;
 	infotype tim;
+	int i = 0, j, k;
+	char group;
 	
 	fileP = fopen("pemenangFaseGrup(before).txt","r");
 	tim = (infotype) malloc (3 * sizeof(char));
 	if(fileP == NULL)
 	{
-		printf("\nFile tidak bisa terbuka!\n");
+		printf("\n\t\t     File tidak bisa terbuka!\n");
 	}
 	else
 	{
+		fileP = fopen("pemenangFaseGrup(before).txt","r");
 		while(!feof(fileP))
 		{
 			fscanf(fileP, "%s\n", tim);
-			printf("%s\n", tim);	
+			i++;
 		}
+		fclose(fileP);
+		i = i/2;
+		fileP = fopen("pemenangFaseGrup(before).txt","r");
+		printf("\n\n");
+		for(j = 65; j < 64+i; j++)
+		{
+			group = (char)j;
+			printf("\t\t---------------------------------------------");
+			printf("\n\t\t|\t\t   Group %c \t\t    |\n", group);
+			printf("\t\t---------------------------------------------\n");
+			k = 0;
+			while(!feof(fileP) && k < 2)
+			{
+				fscanf(fileP, "%s\n", tim);
+				printf("\t\t|\t\t     %s\t\t    |\n", tim);
+				k++;	
+			}	
+			printf("\t\t---------------------------------------------\n\n");
+		}
+		fclose(fileP);
 	}
 	fclose(fileP);
 }
