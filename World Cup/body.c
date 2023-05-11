@@ -195,6 +195,7 @@ void DelPGroup (ListGroup * L, infotype X){
 		nextGroup(P) = Nil;
 		DeAlokasiGroup (P);
 	}
+	
 }
 
 void DelPTeam (ListTeam * L, infotype X){
@@ -227,6 +228,14 @@ void DelPTeam (ListTeam * L, infotype X){
 		}
 		NextTeam(P) = Nil;
 		DeAlokasiTeam (P);
+	}
+	else{
+		printf("Tim %s tidak ada di dalam grup\n\n",X);
+		system("pause");
+	}
+	else{
+		printf("group %s tidak ada di dalam list\n\n",X);
+		system("pause");
 	}
 }
 
@@ -325,25 +334,12 @@ void MenuDelGroup(ListGroup * L){
 		groupName = (infotype) malloc (20 * sizeof (char));
 		printf("\nSilahkan ketikan nama grup yang akan di delete : ");
 		scanf("%s", groupName);
-		
 		HeadGroup = First(*L); // HeadGroup diinisiasi untuk menunjuk Grup ke-1
-		while(strcmp(InfoGroup(HeadGroup), groupName) != 0){
-			HeadGroup = nextGroup(HeadGroup);
-			if(HeadGroup == Nil){
-				break;
-			}
+		if (HeadGroup == First(*L)){ // Grup berada di urutan pertama
+			HeadGroup = nextGroup(HeadGroup); //HeadGroup di isi list groupName yang kedua
+			First(*L) = HeadGroup; //HeadGroup (groupName ke 2) dijadikan first
 		}
-		
-		if(HeadGroup != Nil){
-			if (HeadGroup == First(*L)){ // Grup berada di urutan pertama
-				HeadGroup = nextGroup(HeadGroup); //HeadGroup di isi list groupName yang kedua
-				First(*L) = HeadGroup; //HeadGroup (groupName ke 2) dijadikan first
-			}
-			DelPGroup(&(*L),groupName); //dealloc
-		}else{
-			printf("\nGrup tidak ada\n\n");
-			system("pause");
-		}
+		DelPGroup(&(*L),groupName); //dealloc
 	}
 }
 
