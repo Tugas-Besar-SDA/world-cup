@@ -171,6 +171,7 @@ int main()
 				}while(menu != 99);
 				break;
 			}
+			menu = 100;
 		}
 	}while(menu != 0);
 	
