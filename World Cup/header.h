@@ -200,7 +200,7 @@ void sortTeamFromGroup();
 
 int countingTeams();
 
-void inputTim(addressNode root, int maxNode);
+void inputTeamToTree(addressNode root, int maxNode);
 
 /* =======================================================*/
 /* ----------------- Proses Pertandingan -----------------*/
