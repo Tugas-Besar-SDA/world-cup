@@ -35,6 +35,7 @@ int main()
 		printf("\t\t\t   2. Group Stage\n");
 		printf("\t\t\t   3. Knockout Stage\n");
 		printf("\t\t\t   4. Add and Delete Group Team\n");
+		printf("\t\t\t   5. About Team\n");
 		printf("\t\t\t   0. Exit\n");
 		printf("\n\t\t=============================================\n");
 		printf("\n\t\t     Pilih menu: ");
@@ -169,6 +170,12 @@ int main()
 						}
 					}
 				}while(menu != 99);
+				break;
+			}
+			case 5:
+			{
+				AboutTeam();
+				system("pause");
 				break;
 			}
 			menu = 100;
