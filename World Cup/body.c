@@ -1,5 +1,8 @@
 #include "header.h"
 
+/*=======================================================================================================*/
+/* 											Muhammad Adi Saputera 										 */
+/*=======================================================================================================*/
 void CreateListGroup (ListGroup * L){
 	First(*L) = Nil;
 }
@@ -226,8 +229,6 @@ void DelPTeam (ListTeam * L, infotype X){
 		DeAlokasiTeam (P);
 	}
 }
-
-/*======================================================================================================*/
 
 void MenuAddGroup(ListGroup * L){
 	//kamus data
@@ -473,11 +474,12 @@ void AboutTeam(){
 	system("pause");
 }
 
-/*======================================================================================================*/
+/*=======================================================================================================*/
+/* 											Mahira Nurhaliza 											 */
+/*=======================================================================================================*/
 
 void Match(addressTeam *M, addressTeam *N)
 {
-	srand(time(Nil));
 	Gol(*M) = rand()%10;
 	Gol(*N) = rand()%10;
 	
@@ -520,11 +522,11 @@ void MatchInGroup(addressTeam *B, addressTeam *C)
 	printf("\t\t\t  Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(*B), Skor(M), Gol(M), Selisih(M));
 	printf("\t\t\t  Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(*C), Skor(N), Gol(N), Selisih(N));
 	printf("\n");
+//	system("pause");
 }
 
 void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D)
 {
-	
 	if(*C == Nil && *D == Nil)
 	{
 		*B = First(A);
@@ -741,7 +743,9 @@ void GroupStage(ListGroup MyListGroup)
 	}while(H != Nil);
 }
 
-/*================================================================================*/
+/*=======================================================================================================*/
+/* 											Rizki Gunawan 												 */
+/*=======================================================================================================*/
 
 /* =====================================================================*/
 /* ------------------------- Modul Pemrosesan --------------------------*/
@@ -771,14 +775,16 @@ void prosesBabakGugur(){
     /* Sorting tim */
     sortTeamFromGroup();
 	/* Memasukkan tim ke tree */
-	inputTim(root, countingTeams());
+	printf("Proses sebelum input tim\n");
+	inputTeamToTree(root, countingTeams());
 	/* Pertandingan dimulai */
+	printf("Proses sebelum sebelum babak gugur\n");
 	babakGugur(root, countingTeams());
 	
 	/* Hasil dari pertandingan */
 	system("cls");
 	printf("\n\n\n\n\n\t\t\t\t\t\t\t\t==================================================\n");
-	printf("        \t\t\t\t\t\t\t|\t\t   CHAMPION: %s\t\t |", root->value);
+	printf("        \t\t\t\t\t\t\t|>>>>>>>>>>>>>>>>  CHAMPION: %s <<<<<<<<<<<<<<<<|", root->value);
 	printf("\n\t\t\t\t\t\t\t\t==================================================\n\n\n\n");
 }
 
@@ -894,29 +900,26 @@ int countingTeams(){
 	
 	FILE *file;
 	infotype buffer;
-	
+	printf("Masuk counting teams\n");
 	file = fopen("pemenangFaseGrup(before).txt", "r");
 	if(file == NULL){
 		printf("File tidak bisa dibuka\n");
 	}else{
 		buffer = (infotype) malloc (3 * sizeof(char));
-		while(!feof(file)){
-			fscanf(file, "%s", buffer);
+		while (fgets(buffer, 100, file)) {
 			quantity++;
-		}
+    	}
 	}
 	
 	fclose(file);
-	
 	return (quantity * 2) - 1;
 }
 
-void inputTim(addressNode root, int maxNode){
+void inputTeamToTree(addressNode root, int maxNode){
     FILE *file;
     infotype buffer;
     int i = 1;
     addressNode Psearch;
-	maxNode = 31;
     file = fopen("pemenangFaseGrup(after).txt", "r");
 
     if(file == NULL){
@@ -977,20 +980,19 @@ void babakGugur(addressNode root, int maxNode){
 			if(pointerPertandingan.leftTeam->gol == pointerPertandingan.rightTeam->gol){
 				// masuk ke sesi penalty
 				babakPenalty(root, pointerPertandingan);
-//				printf("\t\t=========================");
 				if(pointerPertandingan.leftTeam->golPenalty > pointerPertandingan.rightTeam->golPenalty){
-					printf("\n\t\t\t\t\t\t\t\t\t\t     Tim %s menang!\n", pointerPertandingan.leftTeam->value);
+					printf("\n\t\t\t\t\t\t\t\t\t\t>>>> Tim %s menang <<<<!\n", pointerPertandingan.leftTeam->value);
 					upgradeLeftTeam(pointerPertandingan, nodeSearch);
 				}else{
-					printf("\n\t\t\t\t\t\t\t\t\t\t     Tim %s menang!\n", pointerPertandingan.rightTeam->value);
+					printf("\n\t\t\t\t\t\t\t\t\t\t>>>> Tim %s menang <<<<!\n", pointerPertandingan.rightTeam->value);
 					upgradeRightTeam(pointerPertandingan, nodeSearch);
 				}
 			}else if(pointerPertandingan.leftTeam->gol > pointerPertandingan.rightTeam->gol){
-				printf("\n\t\t\t\t\t\t\t\t\t\t     Tim %s menang!\n", pointerPertandingan.leftTeam->value);
+				printf("\n\t\t\t\t\t\t\t\t\t\t>>>> Tim %s menang! <<<<\n", pointerPertandingan.leftTeam->value);
 				upgradeLeftTeam(pointerPertandingan, nodeSearch);
 				// pertandingan berhenti
 			}else{
-				printf("\n\t\t\t\t\t\t\t\t\t\t     Tim %s menang!\n", pointerPertandingan.rightTeam->value);
+				printf("\n\t\t\t\t\t\t\t\t\t\t>>>> Tim %s menang! <<<<\n", pointerPertandingan.rightTeam->value);
 				upgradeRightTeam(pointerPertandingan, nodeSearch);
 			}
 			printf("\n\n\n");
