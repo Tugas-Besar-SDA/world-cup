@@ -195,6 +195,10 @@ void DelPGroup (ListGroup * L, infotype X){
 		nextGroup(P) = Nil;
 		DeAlokasiGroup (P);
 	}
+	else{
+		printf("group %s tidak ada di dalam list\n\n",X);
+		system("pause");
+	}
 	
 }
 
@@ -231,10 +235,6 @@ void DelPTeam (ListTeam * L, infotype X){
 	}
 	else{
 		printf("Tim %s tidak ada di dalam grup\n\n",X);
-		system("pause");
-	}
-	else{
-		printf("group %s tidak ada di dalam list\n\n",X);
 		system("pause");
 	}
 }
@@ -467,7 +467,6 @@ void AboutTeam(){
 
 	fclose(file);
 	printf("\n");
-	system("pause");
 }
 
 /*=======================================================================================================*/
