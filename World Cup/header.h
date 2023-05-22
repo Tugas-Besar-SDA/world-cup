@@ -45,7 +45,6 @@ typedef struct {
 	addressTeam First;
 } ListTeam;
 
-typedef char* infotype;
 typedef struct tNode *addressNode;
 typedef struct tNode {
     addressNode left;
@@ -173,6 +172,8 @@ void OpenListOfWinner();
 void GroupStage(ListGroup MyListGroup);
 
 /* Rizki Gunawan */
+boolean validasiJumlahTim(ListGroup L);
+
 /* ================================================*/
 /* ---------------- Modul Pemroses ----------------*/
 /* ================================================*/
