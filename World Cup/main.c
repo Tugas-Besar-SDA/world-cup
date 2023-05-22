@@ -26,6 +26,7 @@ int main()
 	//program
 	do
 	{
+		loadingScreen();
 		system("cls");
 		printf("\n");
 		printf("\n\t\t=============================================\n");
@@ -44,6 +45,7 @@ int main()
 		{
 			case 1:
 			{
+				loadingScreen();
 				if(!isEmptyGroup(MyListGroup))
 				{
 					system("cls");
@@ -55,8 +57,15 @@ int main()
 			}
 			case 2:
 			{
+				if(validasiJumlahTim(MyListGroup) == false){
+					printf("\n\t\tJumlah tim yang kemungkinan masuk ke babak gugur tidak 2^n (2, 4, 8, 16, 32, dst.)\n");
+					printf("\n\n\t\tKeterangan: Jumlah tim tersebut dihitung dari jumlah tim ke-1 dan ke-2 dari setiap grup\n\n");
+					system("pause");
+					break;
+				}
 				do
 				{
+					loadingScreen();
 					system("cls");
 					printf("\n");
 					printf("\n\t\t=============================================\n");
