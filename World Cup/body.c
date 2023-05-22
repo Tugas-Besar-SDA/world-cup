@@ -479,9 +479,11 @@ void AboutTeam(){
 
 void Match(addressTeam *M, addressTeam *N)
 {
+	//random gol untuk kedua tim
 	Gol(*M) = rand()%10;
 	Gol(*N) = rand()%10;
 	
+	//penentuan skor
 	if(Gol(*M) == Gol(*N))
 	{
 		Skor(*M) = 1;
@@ -497,12 +499,15 @@ void Match(addressTeam *M, addressTeam *N)
 		Skor(*M) = 0;
 		Skor(*N) = 3;
 	}
+	
+	//menghitung selisih gol
 	Selisih(*M) = Gol(*M) - Gol(*N);
 	Selisih(*N) = Gol(*N) - Gol(*M);
 }
 
 void PointCalculation(addressTeam *V, addressTeam *M)
 {
+	//kalkulasi gol setiap pertandingan
 	Skor(*V) = Skor(*V) + Skor(*M);
 	Gol(*V) = Gol(*V) + Gol(*M);
 	Selisih(*V) = Selisih(*V) + Selisih(*M);
@@ -515,17 +520,21 @@ void MatchInGroup(addressTeam *B, addressTeam *C)
 	M = (addressTeam) malloc (sizeof (DataTeam));
 	N = (addressTeam) malloc (sizeof (DataTeam));
 	
+	//random gol dilakukan pada address sembarang
 	Match(&M, &N);
+	//kalkulasi gol dengan tim yang ditandingkan
 	PointCalculation(&(*B), &M);
 	PointCalculation(&(*C), &N); 
 	printf("\n\t\t     Team = %s, Skor = %d, Gol = %d, Selisih = %d", InfoTeam(*B), Skor(M), Gol(M), Selisih(M));
 	printf("\n\t\t     Team = %s, Skor = %d, Gol = %d, Selisih = %d", InfoTeam(*C), Skor(N), Gol(N), Selisih(N));
 	printf("\n");
-//	system("pause");
 }
 
 void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D)
 {
+//menandingkan 2 tim dalam 1 grup dan berlanjut ke grup selanjutnya
+
+	//jika addressTeam masih nil (untuk awal pertandingan
 	if(*C == Nil && *D == Nil)
 	{
 		*B = First(A);
@@ -533,6 +542,7 @@ void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D)
 		*D = NextTeam(*C);
 	}
 	
+	//pertandingan selanjutnya selain peratndingan awal
 	do
 	{
 		if(*C == Nil)
@@ -559,7 +569,6 @@ void MatchButton(ListGroup A, addressGroup *B, addressTeam *C, addressTeam *D)
 			MatchInGroup(&(*C), &(*D));
 			*D = NextTeam(*D);
 		}
-//		printf("D = %s\n", InfoTeam(*D));
 	}while(*C == Nil || *D == NextTeam(*C));
 }
 
@@ -580,6 +589,7 @@ void GroupWinner(addressGroup A, addressTeam *M, addressTeam *N)
 	B = nextGroupToTeam(A);
 	C = NextTeam(B);
 	
+	//menentukan juara grup
 	while(C != Nil)
 	{
 		if(Skor(B) > Skor(C))
@@ -650,10 +660,10 @@ void GroupWinner(addressGroup A, addressTeam *M, addressTeam *N)
 
 int CountTeam(addressGroup *A)
 {
-//	addressGroup B;
 	addressTeam C;
 	int sum = 0;
 	
+	//menghitung jumlah tim di dalam grup
 	C = nextGroupToTeam(*A);
 	while(C != Nil)
 	{
@@ -665,6 +675,9 @@ int CountTeam(addressGroup *A)
 
 void WinnerList(addressTeam P, addressTeam Q)
 {
+//menyimpan juara grup dalam file
+
+	//kamus data lokal
 	FILE *fileP;
 	infotype tim, tim1;
 	
@@ -698,6 +711,7 @@ void OpenListOfWinner()
 	int i = 0, j, k;
 	char group;
 	
+	//menampilkan list juara grup
 	fileP = fopen("pemenangFaseGrup(before).txt","r");
 	tim = (infotype) malloc (3 * sizeof(char));
 	if(fileP == NULL)
@@ -743,21 +757,27 @@ void GroupStage(ListGroup MyListGroup)
 	addressTeam B, C;
 	int SumOfTeam, SumOfMatch, i;
 	
+	//inisialisasi
 	B = (addressTeam) malloc (sizeof (DataTeam));
 	C = (addressTeam) malloc (sizeof (DataTeam));
 	B = Nil;
 	C = Nil;
 	H = First(MyListGroup);
+	
+	//program
 	do
 	{
+		//menghitung tim
 		SumOfTeam = CountTeam(&H);
+		
+		//menghitung jumlah pertandingan
 		SumOfMatch = (SumOfTeam*(SumOfTeam-1))/2;
-			
+		
+		//menampilkan pertandingan	
 		for(i = 1; i <= SumOfMatch; i++)
 		{
 			printf("\n\t\t     Pertandingan %d Group = %s", i, InfoGroup(H));
 			MatchButton(MyListGroup, &I, &B, &C);
-//			system("pause");
 		}
 		H = nextGroup(H);
 	}while(H != Nil);
