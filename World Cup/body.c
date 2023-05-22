@@ -195,11 +195,6 @@ void DelPGroup (ListGroup * L, infotype X){
 		nextGroup(P) = Nil;
 		DeAlokasiGroup (P);
 	}
-	else{
-		printf("group %s tidak ada di dalam list\n\n",X);
-		system("pause");
-	}
-	
 }
 
 void DelPTeam (ListTeam * L, infotype X){
@@ -232,10 +227,6 @@ void DelPTeam (ListTeam * L, infotype X){
 		}
 		NextTeam(P) = Nil;
 		DeAlokasiTeam (P);
-	}
-	else{
-		printf("Tim %s tidak ada di dalam grup\n\n",X);
-		system("pause");
 	}
 }
 
@@ -334,12 +325,25 @@ void MenuDelGroup(ListGroup * L){
 		groupName = (infotype) malloc (20 * sizeof (char));
 		printf("\nSilahkan ketikan nama grup yang akan di delete : ");
 		scanf("%s", groupName);
+		
 		HeadGroup = First(*L); // HeadGroup diinisiasi untuk menunjuk Grup ke-1
-		if (HeadGroup == First(*L)){ // Grup berada di urutan pertama
-			HeadGroup = nextGroup(HeadGroup); //HeadGroup di isi list groupName yang kedua
-			First(*L) = HeadGroup; //HeadGroup (groupName ke 2) dijadikan first
+		while(strcmp(InfoGroup(HeadGroup), groupName) != 0){
+			HeadGroup = nextGroup(HeadGroup);
+			if(HeadGroup == Nil){
+				break;
+			}
 		}
-		DelPGroup(&(*L),groupName); //dealloc
+		
+		if(HeadGroup != Nil){
+			if (HeadGroup == First(*L)){ // Grup berada di urutan pertama
+				HeadGroup = nextGroup(HeadGroup); //HeadGroup di isi list groupName yang kedua
+				First(*L) = HeadGroup; //HeadGroup (groupName ke 2) dijadikan first
+			}
+			DelPGroup(&(*L),groupName); //dealloc
+		}else{
+			printf("\nGrup tidak ada\n\n");
+			system("pause");
+		}
 	}
 }
 
@@ -466,7 +470,7 @@ void AboutTeam(){
 	}
 
 	fclose(file);
-	printf("\n");
+	printf("\n\n\n");
 }
 
 /*=======================================================================================================*/
@@ -514,8 +518,8 @@ void MatchInGroup(addressTeam *B, addressTeam *C)
 	Match(&M, &N);
 	PointCalculation(&(*B), &M);
 	PointCalculation(&(*C), &N); 
-	printf("\t\t\t  Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(*B), Skor(M), Gol(M), Selisih(M));
-	printf("\t\t\t  Team = %s, Skor = %d, Gol = %d, Selisih = %d\n", InfoTeam(*C), Skor(N), Gol(N), Selisih(N));
+	printf("\n\t\t     Team = %s, Skor = %d, Gol = %d, Selisih = %d", InfoTeam(*B), Skor(M), Gol(M), Selisih(M));
+	printf("\n\t\t     Team = %s, Skor = %d, Gol = %d, Selisih = %d", InfoTeam(*C), Skor(N), Gol(N), Selisih(N));
 	printf("\n");
 //	system("pause");
 }
@@ -712,20 +716,20 @@ void OpenListOfWinner()
 		i = i/2;
 		fileP = fopen("pemenangFaseGrup(before).txt","r");
 		printf("\n\n");
-		for(j = 65; j < 64+i; j++)
+		for(j = 65; j <= 64+i; j++)
 		{
 			group = (char)j;
-			printf("\t\t---------------------------------------------");
-			printf("\n\t\t|\t\t   Group %c \t\t    |\n", group);
-			printf("\t\t---------------------------------------------\n");
+			printf("\t\t\t    -------------------- ");
+			printf("\n\t\t\t    |      Group %c     |\n", group);
+			printf("\t\t\t    -------------------- \n");
 			k = 0;
 			while(!feof(fileP) && k < 2)
 			{
 				fscanf(fileP, "%s\n", tim);
-				printf("\t\t|\t\t     %s\t\t    |\n", tim);
+				printf("\t\t\t    |        %s       |\n", tim);
 				k++;	
 			}	
-			printf("\t\t---------------------------------------------\n\n");
+			printf("\t\t\t    -------------------- \n\n");
 		}
 		fclose(fileP);
 	}
@@ -747,13 +751,11 @@ void GroupStage(ListGroup MyListGroup)
 	do
 	{
 		SumOfTeam = CountTeam(&H);
-		printf("Team = %d\n", SumOfTeam);
 		SumOfMatch = (SumOfTeam*(SumOfTeam-1))/2;
-		printf("Match = %d\n", SumOfMatch);
-		
+			
 		for(i = 1; i <= SumOfMatch; i++)
 		{
-			printf("Pertandingan %d Group = %s\n", i, InfoGroup(H));
+			printf("\n\t\t     Pertandingan %d Group = %s", i, InfoGroup(H));
 			MatchButton(MyListGroup, &I, &B, &C);
 //			system("pause");
 		}
@@ -764,6 +766,40 @@ void GroupStage(ListGroup MyListGroup)
 /*=======================================================================================================*/
 /* 											Rizki Gunawan 												 */
 /*=======================================================================================================*/
+boolean validasiJumlahTim(ListGroup L){
+// menghitung dua besar dari setiap grup, lalu dikalkulasi jumlah nya
+// jika jumlahnya adalah 2^n (2, 4, 8, 16, 32, 64, dst.), maka jumlah tim valid dan return true
+// jika jumlahnya selain 2^n, maka jumlah tim tidak valid dan return false
+	//kamus data
+	addressGroup P;
+	addressTeam Q;
+	int i, j, jumlahTim = 0;
+	
+	//program
+	if (First(L) == Nil){
+		printf ("ListGroup Kosong .... \a\n");
+	}else {	//ListGroup memiliki elemen
+		P = First(L);
+		while (P != Nil){
+			Q = nextGroupToTeam(P);
+			i = 0;
+			while (Q != Nil && i != 2){
+				Q = NextTeam(Q);
+				jumlahTim++;
+				i++;
+			}
+			P = nextGroup(P);
+		}
+		j = 1;
+		while(j < jumlahTim){
+			j *= 2;
+			if(j > jumlahTim){
+				return false;
+			}
+		}
+		return true;
+	}
+}
 
 /* =====================================================================*/
 /* ------------------------- Modul Pemrosesan --------------------------*/
@@ -1109,7 +1145,7 @@ addressNode searchNode(addressNode root, int key) {
 }
 
 int randomGol(){
-	return rand() % 10;
+	return rand() % 2;
 }
 
 int randomPenalty(){
